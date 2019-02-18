@@ -1,0 +1,21 @@
+{
+  "name": "generate",
+  "version": "1.1.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^1.16.4"
+  },
+  "dependencies": {
+    "highlight.js": "^9.14.2",
+    "js-yaml": "^3.12.1",
+    "marked": "^0.6.0",
+    "pinyin": "^2.8.3"
+  }
+}

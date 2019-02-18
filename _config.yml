@@ -1,0 +1,5 @@
+# Configuration
+
+# Directory
+postsPath: ../p/posts
+dbPath: ../n/store/db.json
