@@ -27,6 +27,7 @@ var config = FileSystem.readYamlFile('./_config.yml')
 
 // 定义数据
 var data = {
+  categories: [],
   posts: [],
   routes: []
 }

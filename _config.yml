@@ -2,4 +2,4 @@
 
 # Directory
 postsPath: ../p/posts
-dbPath: ../n/store/db.json
+dbPath: ../generate-frontend/store/db.json
