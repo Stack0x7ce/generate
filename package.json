@@ -1,6 +1,6 @@
 {
   "name": "generate",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -17,9 +17,11 @@
     "prettier": "^1.16.4"
   },
   "dependencies": {
+    "crypto": "^1.0.1",
     "highlight.js": "^9.14.2",
     "js-yaml": "^3.12.1",
     "marked": "^0.6.0",
-    "pinyin": "^2.8.3"
+    "pinyin": "^2.8.3",
+    "qiniu": "^6.1.13"
   }
 }

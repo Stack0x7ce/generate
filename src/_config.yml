@@ -1,5 +1,0 @@
-# Configuration
-
-# Directory
-postsPath: ../../testpost/
-dbPath: ../generate-frontend/store/db.json
