@@ -2,14 +2,20 @@
   "name": "generate",
   "version": "1.1.2",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node src",
+    "lint": "eslint --ext .js --ignore-path .eslintignore ."
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Stack0x7ce <stack0x7ce@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.14.1",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-prettier": "^3.0.1",
     "prettier": "^1.16.4"
   },
   "dependencies": {

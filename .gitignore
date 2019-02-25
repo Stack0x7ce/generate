@@ -1,8 +1,4 @@
-# Logs
-*.log
-
-# Dependency directories
+.DS_STORE/
+.idea/
 node_modules/
-
-# IDE
-.idea
+package-lock.json
