@@ -1,15 +1,13 @@
 {
   "name": "generate",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
     "start": "node src",
     "lint": "eslint --ext .js --ignore-path .eslintignore ."
   },
-  "keywords": [],
   "author": "Stack0x7ce <stack0x7ce@gmail.com>",
-  "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^10.0.1",
     "eslint": "^5.14.1",
