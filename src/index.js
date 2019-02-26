@@ -27,25 +27,20 @@ const CryptoModel = require('./models/Crypto')
  * 配置文件
  * @type {*}
  */
-
 const configPath = './_config.yml'
 const config = FileSystem.readYamlFile(configPath)
 
 const Qiniu = new QiniuModel(
-  config.Access_Key,
-  config.Secret_Key,
-  config.bucket
+  config.qiniu.Access_Key,
+  config.qiniu.Secret_Key,
+  config.qiniu.bucket
 )
 
-const Crypto = new CryptoModel(config.secret, config.Algorithm)
+const Crypto = new CryptoModel(config.crypto.secret, config.crypto.Algorithm)
 
 // 正则表达式
 const reg = /!\[(.*)\]\((.*)\)/g
 const reg2 = /^!\[(.*)\]\((.*)\)/
-
-console.log(config)
-
-// return
 
 // 定义数据
 var data = {
@@ -57,68 +52,45 @@ var data = {
 // 获取分类
 var categories = FileSystem.readDir(config.postPath)
 
-console.log(categories)
-
 // 循环获取内容，保存到数据中
 for (let category of categories) {
   data.categories.push(category)
 
   let categoryPath = config.postPath + category
-  //
-  // console.log(categoryPath)
-  //
-  // return
 
   let posts = FileSystem.readDir(categoryPath)
-  //
-  // console.log(posts)
-  //
-  // return
 
   for (let post of posts) {
     let postPath = categoryPath + '/' + post
-
-    // console.log(postPath)
-    //
-    // return
-
-    let content = FileSystem.readFile(postPath + '/README.md')
+    var content = FileSystem.readFile(postPath + '/README.md')
     let yaml = FileSystem.readYamlFile(postPath + '/README.yml')
     let route = Pinyin.to(post)
 
-    // 处理 content 中图片
-    // 获取图片信息
-
+    // 获取内容中图片
     let imgs = content.match(reg)
 
+    // 处理图片信息
     for (let img of imgs) {
+      // 获取图片详细信息
       let result = img.match(reg2)
-
       // 图片名称
       let imgName = result[1]
+      // 图片链接
+      let imgUrl = result[2]
       // 图片路径
       let imgPath = postPath + '/' + result[2]
       // 图片后缀
       let imgExt = result[2].split('.').pop()
-      //
-      // console.log( imgName, imgPath, imgExt)
 
+      // 生成 key
       let key = Crypto.cipher(imgName) + '.' + imgExt
+      // 判断图片是否已经上传过，如果没有就上传
+      Qiniu.getInfo(key, imgPath)
 
-      // console.log(key)
-
-      let info = Qiniu.getInfo(key)
-
-      if (!info) {
-        // 图片不存在
-        // 生成上传 token
-        let uptoken = Qiniu.uptoken(key)
-        // 调用 uploadFile 上传
-        Qiniu.uploadFile(uptoken, key, imgPath)
-      }
-
-      url = config.cdnDomain + '/' + key
-
+      // 图片链接
+      url = config.qiniu.cdnDomain + '/' + key
+      // 替换图片地址
+      content = content.replace(imgUrl, url)
     }
 
     data.posts.push({

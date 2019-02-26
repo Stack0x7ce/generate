@@ -32,28 +32,40 @@ class Qiniu {
     this.qiniu.io.putFile(uptoken, key, localFile, extra, function(err, ret) {
       if (!err) {
         // 上传成功， 处理返回值
-        console.log(ret.hash, ret.key, ret.persistentId)
+        // console.log(ret.hash, ret.key, ret.persistentId)
+        console.log(key + ' 上传成功')
       } else {
         // 上传失败， 处理返回代码
         console.log(err)
+        console.log(key + ' 上传失败')
       }
     })
   }
 
   /**
    * 判断空间是否存在该文件
-   * @param key
+   * @param {*} key
+   * @param {*} imgPath
    */
-  getInfo(key) {
+  getInfo(key, imgPath) {
     let client = new this.qiniu.rs.Client()
+
     client.stat(this.bucket, key, function(err, ret) {
       if (!err) {
-        return true
+        console.log( key + ' 已存在')
       } else {
-        return false
+        // 不存在
+        // 生成上传 token
+        let uptoken = this.uptoken(key)
+        // 调用 uploadFile 上传
+        this.uploadFile(uptoken, key, imgPath)
       }
-    });
+    }.bind(this))
   }
 }
 
+/**
+ * export
+ * @type {Qiniu}
+ */
 module.exports = Qiniu
