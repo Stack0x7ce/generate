@@ -50,17 +50,21 @@ class Qiniu {
   getInfo(key, imgPath) {
     let client = new this.qiniu.rs.Client()
 
-    client.stat(this.bucket, key, function(err, ret) {
-      if (!err) {
-        console.log( key + ' 已存在')
-      } else {
-        // 不存在
-        // 生成上传 token
-        let uptoken = this.uptoken(key)
-        // 调用 uploadFile 上传
-        this.uploadFile(uptoken, key, imgPath)
-      }
-    }.bind(this))
+    client.stat(
+      this.bucket,
+      key,
+      function(err, ret) {
+        if (!err) {
+          console.log(key + ' 已存在')
+        } else {
+          // 不存在
+          // 生成上传 token
+          let uptoken = this.uptoken(key)
+          // 调用 uploadFile 上传
+          this.uploadFile(uptoken, key, imgPath)
+        }
+      }.bind(this)
+    )
   }
 }
 

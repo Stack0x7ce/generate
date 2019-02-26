@@ -19,8 +19,16 @@ const Pinyin = require('./models/Pinyin')
  */
 const Process = require('./models/Process')
 
+/**
+ * require
+ * @type {Qiniu}
+ */
 const QiniuModel = require('./models/Qiniu')
 
+/**
+ * require
+ * @type {Crypto}
+ */
 const CryptoModel = require('./models/Crypto')
 
 /**
@@ -30,12 +38,20 @@ const CryptoModel = require('./models/Crypto')
 const configPath = './_config.yml'
 const config = FileSystem.readYamlFile(configPath)
 
+/**
+ * 实例化
+ * @type {Qiniu}
+ */
 const Qiniu = new QiniuModel(
   config.qiniu.Access_Key,
   config.qiniu.Secret_Key,
   config.qiniu.bucket
 )
 
+/**
+ * 实例化
+ * @type {Crypto}
+ */
 const Crypto = new CryptoModel(config.crypto.secret, config.crypto.Algorithm)
 
 // 正则表达式
@@ -106,6 +122,31 @@ for (let category of categories) {
     })
 
     data.routes.push('/posts/' + category + '/' + route)
+
+    // Hexo
+    let frontMatter = {
+      title: post,
+      date: yaml.created,
+      author: config.author,
+      top: yaml.top,
+      categories: category,
+      tags: yaml.tags
+    }
+
+    let hexo = `---\n` + FileSystem.dumpYaml(frontMatter) + `---\n\n` + content
+
+    hcategoryPath = config.hexoPostPath + category + '/'
+
+    let exists = FileSystem.exists(hcategoryPath)
+
+    if (!exists) {
+      // 不存在创建目录
+      FileSystem.mkdir(hcategoryPath)
+    }
+
+    let hpath = hcategoryPath + post + '.md'
+
+    FileSystem.writeFile(hpath, hexo)
   }
 }
 

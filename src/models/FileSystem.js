@@ -36,6 +36,14 @@ class FileSystem {
   }
 
   /**
+   * js 对象转 yml
+   * @param {*} data
+   */
+  dumpYaml(data) {
+    return this.yaml.dump(data)
+  }
+
+  /**
    * 写入文件
    * @param path
    * @param data
@@ -43,6 +51,30 @@ class FileSystem {
    */
   writeFile(path, data) {
     return this.fs.writeFileSync(path, data)
+  }
+
+  /**
+   * 路径是否存在
+   * 存在返回 true
+   * 不存在返回 false
+   * @param {*} path
+   */
+  exists(path) {
+    return this.fs.existsSync(path)
+  }
+
+  /**
+   * 创建目录
+   * @param {*} path
+   */
+  mkdir(path) {
+    this.fs.mkdir(path, function(err) {
+      if (err) {
+        return console.error(err)
+      }
+
+      console.log('目录创建成功')
+    })
   }
 }
 
