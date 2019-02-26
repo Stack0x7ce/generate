@@ -1,20 +1,25 @@
 # Configuration
+author: xxx
 
 # 文章目录
 postPath: ../testpost/src/
 # 数据导出路径
 dbPath: ./db.json
+# hexo/source/_posts
+hexoPostPath: ../hexo/source/_posts/
 
 # 七牛云
-Access_Key: xxx
-Secret_Key: xx
-## 要上传的空间
-bucket: xxx
-## CDN 域名
-cdnDomain: http://xxx.com
+qiniu:
+  Access_Key: xxx
+  Secret_Key: xxx
+  ## 要上传的空间
+  bucket: xxx
+  ## CDN 域名
+  cdnDomain: http://xxx.com
 
 # 加密
-## 密码
-secret: xxx # String 类型
-## 算法
-Algorithm: xxx
+crypto:
+  ## 密码
+  secret: xxx # String 类型
+  ## 算法
+  Algorithm: xxx
