@@ -114,12 +114,16 @@ for (let category of categories) {
     data.posts.push({
       route: route,
       title: post,
-      category: category,
-      top: yaml.top,
       created: yaml.created,
       updated: yaml.updated,
+      author: config.author,
+      img: yaml.img,
+      top: yaml.top,
+      cover: yaml.cover,
+      coverImg: yaml.coverImg,
+      toc: yaml.toc,
+      category: category,
       tags: yaml.tags,
-      description: content,
       content: Marked.renderer(content)
     })
 
@@ -134,6 +138,7 @@ for (let category of categories) {
       top: yaml.top,
       cover: yaml.cover,
       coverImg: yaml.coverImg,
+      toc: yaml.toc,
       categories: category,
       tags: yaml.tags
     }
