@@ -68,13 +68,8 @@ class FileSystem {
    * @param {*} path
    */
   mkdir(path) {
-    this.fs.mkdir(path, function(err) {
-      if (err) {
-        return console.error(err)
-      }
-
-      console.log('目录创建成功')
-    })
+    this.fs.mkdirSync(path)
+    console.log(path + ' 目录创建成功')
   }
 }
 
