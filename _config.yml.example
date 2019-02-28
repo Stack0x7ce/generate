@@ -22,4 +22,4 @@ crypto:
   ## 密码
   secret: xxx # String 类型
   ## 算法
-  Algorithm: xxx
+  Algorithm: aes192

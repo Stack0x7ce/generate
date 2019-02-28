@@ -99,7 +99,7 @@ for (let category of categories) {
       let imgExt = result[2].split('.').pop()
 
       // 生成 key
-      let key = Crypto.cipher(imgName) + '.' + imgExt
+      let key = Crypto.cipher(yaml.created + imgName) + '.' + imgExt
       // 判断图片是否已经上传过，如果没有就上传
       Qiniu.getInfo(key, imgPath)
 
@@ -128,7 +128,10 @@ for (let category of categories) {
       title: post,
       date: yaml.created,
       author: config.author,
+      img: yaml.img,
       top: yaml.top,
+      cover: yaml.cover,
+      coverImg: yaml.coverImg,
       categories: category,
       tags: yaml.tags
     }
